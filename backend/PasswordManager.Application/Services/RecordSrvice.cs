@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PasswordManager.Application.Exceptions;
 using PasswordManager.Application.Interfaces;
 using PasswordManager.Core.Models;
 using PasswordManager.Core.Request;
@@ -25,7 +26,7 @@ namespace PasswordManager.Application.Services
             if (request.RecordType == Core.Enum.RecordType.Email 
                 && !IsValidEmail(request.Name))
             {
-                throw new Exception("Неверный формат электронной почты.");
+                throw new EmailFormatException("Неверный формат электронной почты.");
             }
 
             var existingRecords = await _context.Records
@@ -33,7 +34,7 @@ namespace PasswordManager.Application.Services
 
             if (existingRecords != null) 
             {
-                throw new Exception("Запись с таким названием уже существует.");
+                throw new RecordExistsException("Запись с таким названием уже существует.");
             }
 
             var record = new Record()
