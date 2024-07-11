@@ -1,0 +1,23 @@
+<h4>Добавить запись</h4>
+<form [formGroup]="recordForm" (ngSubmit)="onSubmit()" class="form-container">
+  <mat-form-field class="input-field">
+    <mat-label>Наименование</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field class="input-field">
+    <mat-label>Пароль</mat-label>
+    <input matInput formControlName="password" type="text">
+  </mat-form-field>
+
+  <label class="record-type-label">Тип записи:</label>
+    <mat-radio-group formControlName="recordType">
+      <mat-radio-button value=0>Сайт</mat-radio-button>
+      <mat-radio-button value=1>Электронная почта</mat-radio-button>
+    </mat-radio-group>
+
+  <div class="button-container">
+    <button mat-button type="submit" class="button-add">Сохранить</button>
+    <button mat-button type="button" class="button-end" (click)="onCancel()">Отмена</button>
+  </div>
+</form>
